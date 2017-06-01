@@ -53,7 +53,7 @@ plt.show()
 ```
 
 
-![png](output_4_0.png)
+![png](aux/output_4_0.png)
 
 
 This step involves the process called "feature extraction". We will use the well known LBP (Local Binary Patterns).
@@ -94,7 +94,7 @@ plt.show()
 ```
 
 
-![png](output_8_0.png)
+![png](aux/output_8_0.png)
 
 
 Now we will try to predict the emotions represented in five random images training a simple classifier with the rest. The classifier that we will use is the K-Nearest Neighbor.
@@ -164,7 +164,7 @@ plt.show()
 ```
 
 
-![png](output_12_0.png)
+![png](aux/output_12_0.png)
 
 
 Sometimes it is difficult even for us (humans) to identify the emotion that is supposedly being expressed. In this images if the real emotion fits the predicted one, then the title is green (right prediction), red otherwise (wrong prediction).
