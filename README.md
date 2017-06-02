@@ -1,7 +1,9 @@
 # emotion-recognition-example
 Face recognition example using the Jaffe database
 
-The principal library that we are going to use is Scikit Learn. I recommend the use of the Anaconda Python Distribution for everything related to scientific purposes.
+The principal library that we are going to use is Scikit Learn. I recommend the
+use of the Anaconda Python Distribution for everything related to scientific
+purposes.
 
 ```python
 import os
@@ -15,7 +17,9 @@ from sklearn.model_selection import KFold as KF
 from sklearn.model_selection import cross_val_score
 ```
 
-Here we load the images, and based on the name of the file we identify the class, in this case is a number from 1 to 7 that we can find in the seventh character of the filename.
+Here we load the images, and based on the name of the file we identify the
+class, in this case is a number from 1 to 7 that we can find in the seventh
+character of the filename.
 
 
 ```python
@@ -56,7 +60,8 @@ plt.show()
 ![png](aux/output_4_0.png)
 
 
-This step involves the process called "feature extraction". We will use the well known LBP (Local Binary Patterns).
+This step involves the process called "feature extraction". We will use the
+well known LBP (Local Binary Patterns).
 
 
 ```python
@@ -77,7 +82,8 @@ lbp_hists = np.asarray(lbp_hists)
 ```
 
 Here we visulize the respective descriptors of the women shown before.
-(Observation: the last component of each histogram was ommited for visulization purposes, it was too big)
+(Observation: the last component of each histogram was ommited for visulization
+purposes, it was too big)
 
 
 ```python
@@ -97,9 +103,18 @@ plt.show()
 ![png](aux/output_8_0.png)
 
 
-Now we will try to predict the emotions represented in five random images training a simple classifier with the rest. The classifier that we will use is the K-Nearest Neighbor.
+Now we will try to predict the emotions represented in five random images
+training a simple classifier with the rest. The classifier that we will use is
+the K-Nearest Neighbor.
 
-In this step we divide the dataset in training and testing images. This can be performed in many ways, the simplest one is K-Fold. Here we divide the images in ~30 groups (i.e, 5 images per group), this means that we train with ~140 images and test the results with the remaining 5 images. This is just an example (very straigforward, but with very poor results for the same reason), but in general it is recommended to use approximately the 70% of the data for training if you are going to use this method to group your data into training/testing sets.
+In this step we divide the dataset in training and testing images. This can be
+performed in many ways, the simplest one is K-Fold. Here we divide the images
+in ~30 groups (i.e, 5 images per group), this means that we train with ~140
+images and test the results with the remaining 5 images. This is just an
+example (very straigforward, but with very poor results for the same reason),
+but in general it is recommended to use approximately the 70% of the data for
+training if you are going to use this method to group your data into
+training/testing sets.
 
 
 ```python
@@ -124,16 +139,17 @@ print('Predicted Classes:', class_prediction, '\n')
 print('Real Classes:', d[test_indices], '\n')
 ```
 
-    Training images: [  0   1   2   3   4   6   7   8   9  10  11  12  13  14  15  16  17  18
-      19  20  21  22  23  24  25  26  27  28  29  31  32  33  34  35  36  37
-      38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55
-      56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72  73
-      74  75  76  77  78  79  80  81  82  83  84  85  87  88  89  90  91  92
-      93  94  95  96  97  98  99 100 101 102 103 104 106 107 108 109 110 111
-     112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129
-     131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146] 
+    Training images: [0   1   2   3   4   6   7   8   9  10  11  12  13  14
+      15  16  17  18 19  20  21  22  23  24  25  26  27  28  29  31  32  33
+      34  35  36  37 38  39  40  41  42  43  44  45  46  47  48  49  50  51
+      52  53  54  55 56  57  58  59  60  61  62  63  64  65  66  67  68  69
+      70  71  72  73 74  75  76  77  78  79  80  81  82  83  84  85  87  88
+      89  90  91  92 93  94  95  96  97  98  99 100 101 102 103 104 106 107
+      108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125
+      126 127 128 129 131 132 133 134 135 136 137 138 139 140 141 142 143 144
+      145 146] 
     
-    Testing images: [  5  30  86 105 130] 
+    Testing images: [5  30  86 105 130] 
     
     Predicted Classes: [1 2 5 6 7] 
     
@@ -141,7 +157,8 @@ print('Real Classes:', d[test_indices], '\n')
     
 
 
-These results are best represented with their respective images and their predicted labels:
+These results are best represented with their respective images and their
+predicted labels:
 
 
 ```python
@@ -153,7 +170,8 @@ for i,im in enumerate(imgs[test_indices]):
     plt.xticks(())
     plt.yticks(())
     
-    emotions = np.array(['Neutral', 'Happy', 'Sad', 'Surprise', 'Disgust', 'Anger' , 'Fear'])
+    emotions = np.array(['Neutral', 'Happy', 'Sad', 'Surprise', 'Disgust',
+                         'Anger' , 'Fear'])
     title = str(emotions[class_prediction[i]-1])
     
     if title == str(emotions[d[test_indices][i]-1]):
@@ -167,9 +185,13 @@ plt.show()
 ![png](aux/output_12_0.png)
 
 
-Sometimes it is difficult even for us (humans) to identify the emotion that is supposedly being expressed. In this images if the real emotion fits the predicted one, then the title is green (right prediction), red otherwise (wrong prediction).
+Sometimes it is difficult even for us (humans) to identify the emotion that is
+supposedly being expressed. In this images if the real emotion fits the
+predicted one, then the title is green (right prediction), red otherwise
+(wrong prediction).
 
-Finally we can make some cross validations to get a better feeling of how our classification is performing:
+Finally we can make some cross validations to get a better feeling of how our
+classification is performing:
 
 
 ```python
@@ -179,3 +201,7 @@ print('KNN MEAN PERFORMANCE: ',str(np.mean(score_knn)*100)[:5] + '%')
 ```
 
     KNN MEAN PERFORMANCE:  63.66%
+
+As we can see the performance is not great, but its enough for this purpose,
+because this is just an example. It should be noted, nevertheless, that this
+score can be easily improved tuning the parameters.
