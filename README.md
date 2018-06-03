@@ -1,9 +1,8 @@
 # emotion-recognition-example
-Face recognition example using the Jaffe database
 
-The principal library that we are going to use is Scikit Learn. I recommend the
-use of the Anaconda Python Distribution for everything related to scientific
-purposes.
+Emotion recognition example using the Jaffe database
+
+The principal library that we are going to use is Scikit Learn. I recommend the use of the Anaconda Python Distribution for everything related to scientific purposes.
 
 ```python
 import os
@@ -17,10 +16,7 @@ from sklearn.model_selection import KFold as KF
 from sklearn.model_selection import cross_val_score
 ```
 
-Here we load the images, and based on the name of the file we identify the
-class, in this case is a number from 1 to 7 that we can find in the seventh
-character of the filename.
-
+Here we load the images, and based on the name of the file we identify the class, in this case is a number from 1 to 7 that we can find in the seventh character of the filename.
 
 ```python
 data_path = '/home/nico/Workspace/Python/Jaffe/data/'
@@ -38,11 +34,9 @@ for img_name in filenames:
 imgs = np.asarray(imgs)
 d = np.asarray(d)
 indices = np.random.randint(0, len(imgs)-1, 5)
-            
 ```
 
 Here are some of the images used in this example:
-
 
 ```python
 plt.figure(figsize=fs)
@@ -56,13 +50,9 @@ for i,im in enumerate(imgs[indices]):
 plt.show()
 ```
 
-
 ![png](aux/output_4_0.png)
 
-
-This step involves the process called "feature extraction". We will use the
-well known LBP (Local Binary Patterns).
-
+This step involves the process called "feature extraction". We will use the well known LBP (Local Binary Patterns).
 
 ```python
 b = [i for i in range(0,55)]
@@ -81,9 +71,7 @@ for im in imgs:
 lbp_hists = np.asarray(lbp_hists)
 ```
 
-Here we visulize the respective descriptors of the women shown before.
-(Observation: the last component of each histogram was ommited for visulization
-purposes, it was too big)
+Here we visulize the respective descriptors of the women shown before. (Observation: the last component of each histogram was ommited for visulization purposes, it was too big)
 
 
 ```python
@@ -103,19 +91,9 @@ plt.show()
 ![png](aux/output_8_0.png)
 
 
-Now we will try to predict the emotions represented in five random images
-training a simple classifier with the rest. The classifier that we will use is
-the K-Nearest Neighbor.
+Now we will try to predict the emotions represented in five random images training a simple classifier with the rest. The classifier that we will use is the K-Nearest Neighbor.
 
-In this step we divide the dataset in training and testing images. This can be
-performed in many ways, the simplest one is K-Fold. Here we divide the images
-in ~30 groups (i.e, 5 images per group), this means that we train with ~140
-images and test the results with the remaining 5 images. This is just an
-example (very straigforward, but with very poor results for the same reason),
-but in general it is recommended to use approximately the 70% of the data for
-training if you are going to use this method to group your data into
-training/testing sets.
-
+In this step we divide the dataset in training and testing images. This can be performed in many ways, the simplest one is K-Fold. Here we divide the images in ~30 groups (i.e, 5 images per group), this means that we train with ~140 images and test the results with the remaining 5 images. This is just an example (very straigforward, but with very poor results for the same reason), but in general it is recommended to use approximately the 70% of the data for training if you are going to use this method to group your data into training/testing sets.
 
 ```python
 X = np.asarray(lbp_hists)
@@ -155,11 +133,7 @@ print('Real Classes:', d[test_indices], '\n')
     
     Real Classes: [1 2 5 6 7] 
     
-
-
-These results are best represented with their respective images and their
-predicted labels:
-
+These results are best represented with their respective images and their predicted labels:
 
 ```python
 plt.figure(figsize=fs)
@@ -185,14 +159,9 @@ plt.show()
 ![png](aux/output_12_0.png)
 
 
-Sometimes it is difficult even for us (humans) to identify the emotion that is
-supposedly being expressed. In this images if the real emotion fits the
-predicted one, then the title is green (right prediction), red otherwise
-(wrong prediction).
+Sometimes it is difficult even for us (humans) to identify the emotion that is supposedly being expressed. In this images if the real emotion fits the predicted one, then the title is green (right prediction), red otherwise (wrong prediction).
 
-Finally we can make some cross validations to get a better feeling of how our
-classification is performing:
-
+Finally we can make some cross validations to get a better feeling of how our classification is performing:
 
 ```python
 knn = KNN(n_neighbors=1)
@@ -202,6 +171,4 @@ print('KNN MEAN PERFORMANCE: ',str(np.mean(score_knn)*100)[:5] + '%')
 
     KNN MEAN PERFORMANCE:  63.66%
 
-As we can see the performance is not great, but its enough for this purpose,
-because this is just an example. It should be noted, nevertheless, that this
-score can be easily improved tuning the parameters.
+As we can see the performance is not great, but its enough for this purpose, because this is just an example. It should be noted, nevertheless, that this score can be easily improved tuning the parameters.
